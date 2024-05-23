@@ -7,6 +7,7 @@
 </head>
 <body>
 	<?php
+		echo '<h1>Time Checker</h1>';
 		$rand = rand(1, 24);
 		echo $rand;
 
@@ -18,6 +19,21 @@
 			echo "Good Evening!!!";
 		} else {
 			echo "Good Night!!!";
+		}
+	?>
+	<?php
+		echo '<h1>Magic Number Game</h1>';
+		$number = rand(1, 100);
+		echo '<h2>The number is ' . $number . '</h2>';
+
+		if($number % 3 == 0 && $number % 5 == 0) {
+			echo "This number is FIZZBUZZ";
+		} elseif($number % 5 == 0) {
+			echo "The number is BUZZ";
+		} else if($number % 3 == 0) {
+			echo "The number is FIZZ";
+		} else {
+			echo "This number is neither...";
 		}
 	?>
 </body>
