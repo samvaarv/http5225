@@ -22,8 +22,9 @@
             echo 'Error Message: ' . mysqli_error($connect);
             exit;
         } else {
-            echo 'The query found ' . mysqli_num_rows($result);
+            echo '<div style="margin-bottom: 1rem">The query found ' . mysqli_num_rows($result) . '</div>';
         }
+        echo '<h2>Colors</h2>';
         foreach ($result as $item) {
             echo '<div style="margin-bottom: 10px; padding: 8px; display: flex; align-items: center; border: 1px solid ' . $item['Hex'] . '; border-radius: 10px;">
                     <div style="height: 20px; width: 20px; display: inline-block; border-radius: 5px; margin-right: 10px; background-color:' . $item['Hex'] . '">
