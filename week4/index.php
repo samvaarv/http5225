@@ -17,9 +17,7 @@
             return json_decode($data, true);
         }
 
-        $users = getUSers();
-
-       
+        $users = getUSers();       
     ?>
     
     <div class="container">
@@ -53,7 +51,7 @@
     </div>
 
     <div class="container">
-    <h3>Foreach Data</h3>
+        <h3 class="mt-5">Foreach Data</h3>
         <div class="row">
                 <?php
                  if (!empty($users)) {
