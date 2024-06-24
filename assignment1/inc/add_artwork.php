@@ -22,6 +22,11 @@
     $Ward = mysqli_real_escape_string($connect, $_POST['Ward']);
     $WardFullName = mysqli_real_escape_string($connect, $_POST['WardFullName']);
 
+    // Set default description if empty
+    if (empty($Description)) {
+        $Description = "No description about this art.";
+    }
+
     // Start a transaction
     $connect->begin_transaction();
 
