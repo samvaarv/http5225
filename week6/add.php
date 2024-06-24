@@ -22,8 +22,7 @@
   
   <?php 
       require('reusable/conn.php');
-      $query = 'SELECT * FROM schools';
-      $schools = mysqli_query($connect, $query);
+      
   ?>
 
   <div class="container-fluid">
