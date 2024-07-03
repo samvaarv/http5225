@@ -70,6 +70,9 @@
             // Commit transaction
             $connect->commit();
 
+            // Set session variable after successful update
+            $_SESSION['update_success'] = true;
+
             // Set success message
             set_message("Artwork updated successfully", "alert-success");
             header('Location: ../view_artwork.php?id=' . $ArtworkID);

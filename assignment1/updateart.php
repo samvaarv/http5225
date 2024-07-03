@@ -1,6 +1,13 @@
 <?php
     include('reusable/conn.php');
 
+    // Check if session variable indicating update success exists
+    if (isset($_SESSION['update_success']) && $_SESSION['update_success']) {
+        // Redirect to index page or any other desired page
+        header('Location: ../index.php');
+        exit();
+    }
+    
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $artwork_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
         if ($artwork_id !== false && $artwork_id > 0) {

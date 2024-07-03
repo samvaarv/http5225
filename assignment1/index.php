@@ -40,7 +40,7 @@
                 // Modify the query to use LIMIT and OFFSET
                 $query = "SELECT Artworks._id, Artworks.Title, Artworks.ImageURL, Artworks.YearInstalled, Artists.Artist
                         FROM Artworks
-                        JOIN Artists ON Artworks._id = Artists.ArtistID
+                        JOIN Artists ON Artworks.ArtistID = Artists.ArtistID
                         LIMIT $items_per_page OFFSET $offset";
 
                 // Execute the query
