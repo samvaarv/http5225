@@ -1,6 +1,12 @@
 <?php
     session_start(); // for dealing with session in any page, use this
 
+    function secure() {
+        if(!isset($_SESSION['id'])) {
+            header('Location: login.php');
+        }
+    }
+
     function set_message($message, $className) {
         $_SESSION['message'] = $message;
         $_SESSION['className'] = $className;
