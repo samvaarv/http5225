@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Course;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
@@ -13,7 +15,19 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        return view('students.index', [
+            'students' => Student::all()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource deleted.
+     */
+    public function trashed()
+    {
+        return view('students.trashed', [
+            'students' => Student::onlyTrashed() -> get()
+        ]);
     }
 
     /**
@@ -21,7 +35,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('students.create', ['courses' => Course::all()]);
     }
 
     /**
@@ -29,7 +43,10 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        //
+        $student = Student::create($request->validated());
+        $student -> courses() -> attach($request -> course);
+        Session::flash('success', 'Student created succesfully');
+        return redirect() -> route('students.index');
     }
 
     /**
@@ -45,7 +62,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('students.edit', compact('student'));
     }
 
     /**
@@ -53,14 +70,31 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student)
     {
-        //
+        $student -> update($request -> validated());
+        return redirect() -> route('students.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy($id)
     {
-        //
+        $student = Student::withTrashed() -> where('id', $id) -> first();
+        $student -> forceDelete();
+        Session::flash('success', 'Student deleted succcessfully');
+        return redirect() -> route('students.index');
+    }
+
+    public function trash($id) {
+        Student::destroy($id);
+        Session::flash('success', 'Student deleted succcessfully');
+        return redirect() -> route('students.trashed');
+    }
+
+    public function restore($id) {
+        $student = Student::withTrashed() -> where("id", $id) -> first();
+        $student -> restore();
+        Session::flash('success', 'Student restored succcessfully');
+        return redirect() -> route('students.index');
     }
 }

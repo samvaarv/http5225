@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('fname');
             $table->string('lname');
-            $table->string('email')->unique();
+            $table->string('email');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
